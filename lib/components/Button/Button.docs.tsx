@@ -51,6 +51,7 @@ const docs: ComponentDocs = {
   additional: [
     {
       label: 'Sizes',
+      background: 'card',
       description: (
         <Text>
           You can customise the size of the button via the <Strong>size</Strong>{' '}
@@ -90,6 +91,7 @@ const docs: ComponentDocs = {
     },
     {
       label: 'Icons',
+      background: 'card',
       description: (
         <Text>
           You can add an icon to the button by nesting an icon element inside.
@@ -121,6 +123,7 @@ const docs: ComponentDocs = {
     },
     {
       label: 'Loading Button',
+      background: 'card',
       description: (
         <>
           <Text>
@@ -138,7 +141,27 @@ const docs: ComponentDocs = {
         ),
     },
     {
+      label: 'Branding',
+      background: 'card',
+      description: (
+        <Text>
+          For hero actions that want to leverage the brand colour, you can set
+          the button’s <Strong>tone</Strong> to <Strong>brandAccent.</Strong>
+        </Text>
+      ),
+      Example: () =>
+        source(
+          <Inline space="small">
+            <Button tone="brandAccent" weight="strong">
+              Search
+            </Button>
+            <Button tone="brandAccent">Search</Button>
+          </Inline>,
+        ),
+    },
+    {
       label: 'Destructive actions',
+      background: 'card',
       description: (
         <Text>
           For destructive actions like “Delete” you can set the button’s{' '}

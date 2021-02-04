@@ -407,7 +407,7 @@ const docs: ComponentDocs = {
                 body:
                   'Used for elements that need to match the body background.',
                 brand: 'Used for branding larger areas of the screen.',
-                brandAccent: 'Used for branding smaller areas of the screen.',
+                brandAccent: 'Used for hero elements on the screen.',
                 brandAccentHover: 'Hover colour for “brandAccent” elements.',
                 brandAccentActive: 'Hover colour for “brandAccent” elements.',
                 formAccent:
