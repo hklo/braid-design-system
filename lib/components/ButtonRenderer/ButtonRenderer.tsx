@@ -23,9 +23,14 @@ import ActionsContext from '../Actions/ActionsContext';
 import * as styleRefs from './ButtonRenderer.treat';
 
 type ButtonSize = 'standard' | 'small';
-type ButtonTone = 'critical';
+type ButtonTone = 'critical' | 'positive' | 'brandAccent';
 type ButtonWeight = 'weak' | 'regular' | 'strong';
-type ButtonVariant = 'strong' | 'regular' | 'weak' | 'weakInverted';
+type ButtonVariant =
+  | 'strong'
+  | 'regular'
+  | 'regularInverted'
+  | 'weak'
+  | 'weakInverted';
 const buttonVariants: Record<
   ButtonVariant,
   Record<
@@ -42,22 +47,6 @@ const buttonVariants: Record<
   strong: {
     default: {
       textTone: undefined,
-      background: 'brandAccent',
-      backgroundHover: 'brandAccentHover',
-      backgroundActive: 'brandAccentActive',
-      boxShadow: undefined,
-    },
-    critical: {
-      textTone: undefined,
-      background: 'critical',
-      backgroundHover: 'criticalHover',
-      backgroundActive: 'criticalActive',
-      boxShadow: undefined,
-    },
-  },
-  regular: {
-    default: {
-      textTone: undefined,
       background: 'formAccent',
       backgroundHover: 'formAccentHover',
       backgroundActive: 'formAccentActive',
@@ -70,8 +59,22 @@ const buttonVariants: Record<
       backgroundActive: 'criticalActive',
       boxShadow: undefined,
     },
+    positive: {
+      textTone: undefined,
+      background: 'positive',
+      backgroundHover: 'positiveHover',
+      backgroundActive: 'positiveActive',
+      boxShadow: undefined,
+    },
+    brandAccent: {
+      textTone: undefined,
+      background: 'brandAccent',
+      backgroundHover: 'brandAccentHover',
+      backgroundActive: 'brandAccentActive',
+      boxShadow: undefined,
+    },
   },
-  weak: {
+  regular: {
     default: {
       textTone: 'formAccent',
       background: undefined,
@@ -86,8 +89,22 @@ const buttonVariants: Record<
       backgroundActive: 'criticalActive',
       boxShadow: 'borderCriticalLarge',
     },
+    positive: {
+      textTone: 'positive',
+      background: undefined,
+      backgroundHover: 'positiveHover',
+      backgroundActive: 'positiveActive',
+      boxShadow: 'borderPositiveLarge',
+    },
+    brandAccent: {
+      textTone: 'brandAccent',
+      background: undefined,
+      backgroundHover: 'brandAccentHover',
+      backgroundActive: 'brandAccentActive',
+      boxShadow: 'borderBrandAccentLarge',
+    },
   },
-  weakInverted: {
+  regularInverted: {
     default: {
       textTone: undefined,
       background: undefined,
@@ -96,20 +113,105 @@ const buttonVariants: Record<
       boxShadow: 'borderStandardInvertedLarge',
     },
     critical: {
+      textTone: 'critical',
+      background: undefined,
+      backgroundHover: 'criticalHover',
+      backgroundActive: 'criticalActive',
+      boxShadow: 'borderCriticalLarge',
+    },
+    positive: {
+      textTone: 'positive',
+      background: undefined,
+      backgroundHover: 'positiveHover',
+      backgroundActive: 'positiveActive',
+      boxShadow: 'borderPositiveLarge',
+    },
+    brandAccent: {
+      textTone: 'brandAccent',
+      background: undefined,
+      backgroundHover: 'brandAccentHover',
+      backgroundActive: 'brandAccentActive',
+      boxShadow: 'borderBrandAccentLarge',
+    },
+  },
+  weak: {
+    default: {
+      textTone: undefined,
+      background: undefined,
+      backgroundHover: 'neutral',
+      backgroundActive: 'neutral',
+      boxShadow: undefined,
+    },
+    critical: {
+      textTone: 'critical',
+      background: undefined,
+      backgroundHover: 'criticalHover',
+      backgroundActive: 'criticalActive',
+      boxShadow: undefined,
+    },
+    positive: {
+      textTone: 'positive',
+      background: undefined,
+      backgroundHover: 'positiveHover',
+      backgroundActive: 'positiveActive',
+      boxShadow: undefined,
+    },
+    brandAccent: {
+      textTone: 'brandAccent',
+      background: undefined,
+      backgroundHover: 'brandAccentHover',
+      backgroundActive: 'brandAccentActive',
+      boxShadow: undefined,
+    },
+  },
+  weakInverted: {
+    default: {
       textTone: undefined,
       background: undefined,
       backgroundHover: 'card',
       backgroundActive: 'card',
-      boxShadow: 'borderStandardInvertedLarge',
+      boxShadow: undefined,
+    },
+    critical: {
+      textTone: 'critical',
+      background: undefined,
+      backgroundHover: 'criticalHover',
+      backgroundActive: 'criticalActive',
+      boxShadow: undefined,
+    },
+    positive: {
+      textTone: 'positive',
+      background: undefined,
+      backgroundHover: 'positiveHover',
+      backgroundActive: 'positiveActive',
+      boxShadow: undefined,
+    },
+    brandAccent: {
+      textTone: 'brandAccent',
+      background: undefined,
+      backgroundHover: 'brandAccentHover',
+      backgroundActive: 'brandAccentActive',
+      boxShadow: undefined,
     },
   },
 };
 
 const useButtonVariant = (weight: ButtonWeight, tone?: ButtonTone) => {
-  const variantName =
-    useBackgroundLightness() === 'dark' && weight === 'weak'
-      ? 'weakInverted'
-      : weight;
+  // const variantName =
+  //   useBackgroundLightness() === 'dark' && weight === 'regular'
+  //     ? 'regularInverted'
+  //     : weight;
+
+  let variantName: ButtonVariant = weight;
+
+  if (useBackgroundLightness() === 'dark') {
+    if (weight === 'regular') {
+      variantName = 'regularInverted';
+    }
+    if (weight === 'weak') {
+      variantName = 'weakInverted';
+    }
+  }
 
   return (
     buttonVariants[variantName][tone ?? 'default'] ??
@@ -224,6 +326,7 @@ export const PrivateButtonRenderer = ({
   const size = sizeProp ?? actionsContext?.size ?? 'standard';
   const { background, boxShadow } = useButtonVariant(weight, tone);
   const virtualTouchableStyles = useVirtualTouchable({ xAxis: false });
+  const isDarkBg = useBackgroundLightness() === 'dark';
 
   const buttonStyles = useBoxStyles({
     component: 'button',
@@ -239,8 +342,11 @@ export const PrivateButtonRenderer = ({
     outline: 'none',
     className: [
       styles.root,
-      weight === 'weak' ? styles.weak : null,
-      useBackgroundLightness() === 'dark' ? styles.inverted : null,
+      weight === 'regular' ? styles.transparentBg : null,
+      typeof tone !== 'undefined' || weight === 'weak' || weight === 'regular'
+        ? styles.lightHover
+        : null,
+      isDarkBg ? styles.inverted : null,
       size === 'small' ? virtualTouchableStyles : null,
     ],
   });
