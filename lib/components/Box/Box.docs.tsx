@@ -423,8 +423,6 @@ const docs: ComponentDocs = {
                   'Used for user selections, e.g. selected item in an Autosuggest.',
                 positive: 'Used for heavier “positive” elements.',
                 positiveLight: 'Used for lighter “positive” elements.',
-                positiveHover: 'Hover colour for “positive” elements.',
-                positiveActive: 'Active colour for “positive” elements.',
                 critical: 'Used for heavier “critical” elements.',
                 criticalLight: 'Used for lighter “critical” elements.',
                 criticalHover: 'Hover colour for “critical” elements.',
@@ -532,8 +530,6 @@ const docs: ComponentDocs = {
                 borderBrandAccentLarge:
                   'Used for large borders around branded elements.',
                 borderPositive: 'Used for borders around “positive” elements.',
-                borderPositiveLarge:
-                  'Used for large borders around positive elements.',
                 borderCritical: 'Used for borders around “critical” elements.',
                 borderCriticalLarge:
                   'Used for large borders around “critical” elements.',

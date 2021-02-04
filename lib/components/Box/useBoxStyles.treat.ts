@@ -288,9 +288,6 @@ export const boxShadow = styleMap(
     borderPositive: {
       boxShadow: `inset 0 0 0 ${borderWidth.standard}px ${color.positive}`,
     },
-    borderPositiveLarge: {
-      boxShadow: `inset 0 0 0 ${borderWidth.large}px ${color.positive}`,
-    },
     borderInfo: {
       boxShadow: `inset 0 0 0 ${borderWidth.standard}px ${color.info}`,
     },

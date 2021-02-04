@@ -348,8 +348,6 @@ Object {
         | "neutral"
         | "neutralLight"
         | "positive"
-        | "positiveActive"
-        | "positiveHover"
         | "positiveLight"
         | "promote"
         | "promoteLight"
@@ -369,7 +367,6 @@ Object {
         | "borderFormHover"
         | "borderInfo"
         | "borderPositive"
-        | "borderPositiveLarge"
         | "borderPromote"
         | "borderStandard"
         | "borderStandardInverted"
@@ -1163,8 +1160,6 @@ Object {
         | "neutral"
         | "neutralLight"
         | "positive"
-        | "positiveActive"
-        | "positiveHover"
         | "positiveLight"
         | "promote"
         | "promoteLight"
@@ -1184,7 +1179,6 @@ Object {
         | "borderFormHover"
         | "borderInfo"
         | "borderPositive"
-        | "borderPositiveLarge"
         | "borderPromote"
         | "borderStandard"
         | "borderStandardInverted"
@@ -1724,7 +1718,6 @@ Object {
     tone?: 
         | "brandAccent"
         | "critical"
-        | "positive"
     type?: 
         | "button"
         | "reset"
@@ -2148,7 +2141,6 @@ Object {
     tone?: 
         | "brandAccent"
         | "critical"
-        | "positive"
     translate?: 
         | "no"
         | "yes"
@@ -2178,7 +2170,6 @@ Object {
     tone?: 
         | "brandAccent"
         | "critical"
-        | "positive"
     weight?: 
         | "regular"
         | "strong"
@@ -6924,7 +6915,7 @@ exports[`useColor 1`] = `
 Object {
   exportType: hook,
   params: Array [],
-  returnType: { background: { formAccentActive: string; formAccentHover: string; brandAccentActive: string; brandAccentHover: string; criticalActive: string; criticalHover: string; positiveActive: string; ... 21 more ...; neutral: string; }; foreground: { ...; }; },
+  returnType: { background: { formAccentActive: string; formAccentHover: string; brandAccentActive: string; brandAccentHover: string; criticalActive: string; criticalHover: string; infoLight: string; promoteLight: string; ... 18 more ...; neutral: string; }; foreground: { ...; }; },
 }
 `;
 

@@ -23,7 +23,7 @@ import ActionsContext from '../Actions/ActionsContext';
 import * as styleRefs from './ButtonRenderer.treat';
 
 type ButtonSize = 'standard' | 'small';
-type ButtonTone = 'brandAccent' | 'critical' | 'positive';
+type ButtonTone = 'brandAccent' | 'critical';
 type ButtonWeight = 'weak' | 'regular' | 'strong';
 type ButtonVariant =
   | 'strong'
@@ -66,13 +66,6 @@ const buttonVariants: Record<
       backgroundActive: 'criticalActive',
       boxShadow: undefined,
     },
-    positive: {
-      textTone: undefined,
-      background: 'positive',
-      backgroundHover: 'positiveHover',
-      backgroundActive: 'positiveActive',
-      boxShadow: undefined,
-    },
   },
   regular: {
     default: {
@@ -95,13 +88,6 @@ const buttonVariants: Record<
       backgroundHover: 'criticalHover',
       backgroundActive: 'criticalActive',
       boxShadow: 'borderCriticalLarge',
-    },
-    positive: {
-      textTone: 'positive',
-      background: undefined,
-      backgroundHover: 'positiveHover',
-      backgroundActive: 'positiveActive',
-      boxShadow: 'borderPositiveLarge',
     },
   },
   regularInverted: {
@@ -126,13 +112,6 @@ const buttonVariants: Record<
       backgroundActive: 'criticalActive',
       boxShadow: 'borderCriticalLarge',
     },
-    positive: {
-      textTone: 'positive',
-      background: undefined,
-      backgroundHover: 'positiveHover',
-      backgroundActive: 'positiveActive',
-      boxShadow: 'borderPositiveLarge',
-    },
   },
   weak: {
     default: {
@@ -156,13 +135,6 @@ const buttonVariants: Record<
       backgroundActive: 'criticalActive',
       boxShadow: undefined,
     },
-    positive: {
-      textTone: 'positive',
-      background: undefined,
-      backgroundHover: 'positiveHover',
-      backgroundActive: 'positiveActive',
-      boxShadow: undefined,
-    },
   },
   weakInverted: {
     default: {
@@ -184,13 +156,6 @@ const buttonVariants: Record<
       background: undefined,
       backgroundHover: 'criticalHover',
       backgroundActive: 'criticalActive',
-      boxShadow: undefined,
-    },
-    positive: {
-      textTone: 'positive',
-      background: undefined,
-      backgroundHover: 'positiveHover',
-      backgroundActive: 'positiveActive',
       boxShadow: undefined,
     },
   },
@@ -253,7 +218,7 @@ const ButtonChildren = ({ children }: ButtonChildrenProps) => {
       />
       <Box
         position="relative"
-        paddingX={size === 'small' ? 'small' : 'medium'}
+        paddingX={size === 'small' || weight === 'weak' ? 'small' : 'medium'}
         paddingY={size === 'small' ? 'xsmall' : undefined}
         pointerEvents="none"
         textAlign="center"
