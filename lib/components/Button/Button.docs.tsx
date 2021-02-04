@@ -171,10 +171,10 @@ const docs: ComponentDocs = {
       Example: () =>
         source(
           <Inline space="small">
-            <Button tone="critical">
+            <Button tone="critical" weight="strong">
               <IconDelete /> Delete
             </Button>
-            <Button tone="critical" weight="weak">
+            <Button tone="critical">
               <IconDelete /> Delete
             </Button>
           </Inline>,
