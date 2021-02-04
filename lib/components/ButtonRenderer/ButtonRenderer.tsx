@@ -23,7 +23,7 @@ import ActionsContext from '../Actions/ActionsContext';
 import * as styleRefs from './ButtonRenderer.treat';
 
 type ButtonSize = 'standard' | 'small';
-type ButtonTone = 'critical' | 'positive' | 'brandAccent';
+type ButtonTone = 'brandAccent' | 'critical' | 'positive';
 type ButtonWeight = 'weak' | 'regular' | 'strong';
 type ButtonVariant =
   | 'strong'
@@ -52,6 +52,13 @@ const buttonVariants: Record<
       backgroundActive: 'formAccentActive',
       boxShadow: undefined,
     },
+    brandAccent: {
+      textTone: undefined,
+      background: 'brandAccent',
+      backgroundHover: 'brandAccentHover',
+      backgroundActive: 'brandAccentActive',
+      boxShadow: undefined,
+    },
     critical: {
       textTone: undefined,
       background: 'critical',
@@ -66,13 +73,6 @@ const buttonVariants: Record<
       backgroundActive: 'positiveActive',
       boxShadow: undefined,
     },
-    brandAccent: {
-      textTone: undefined,
-      background: 'brandAccent',
-      backgroundHover: 'brandAccentHover',
-      backgroundActive: 'brandAccentActive',
-      boxShadow: undefined,
-    },
   },
   regular: {
     default: {
@@ -81,6 +81,13 @@ const buttonVariants: Record<
       backgroundHover: 'formAccentHover',
       backgroundActive: 'formAccentActive',
       boxShadow: 'borderFormAccentLarge',
+    },
+    brandAccent: {
+      textTone: 'brandAccent',
+      background: undefined,
+      backgroundHover: 'brandAccentHover',
+      backgroundActive: 'brandAccentActive',
+      boxShadow: 'borderBrandAccentLarge',
     },
     critical: {
       textTone: 'critical',
@@ -95,13 +102,6 @@ const buttonVariants: Record<
       backgroundHover: 'positiveHover',
       backgroundActive: 'positiveActive',
       boxShadow: 'borderPositiveLarge',
-    },
-    brandAccent: {
-      textTone: 'brandAccent',
-      background: undefined,
-      backgroundHover: 'brandAccentHover',
-      backgroundActive: 'brandAccentActive',
-      boxShadow: 'borderBrandAccentLarge',
     },
   },
   regularInverted: {
@@ -112,6 +112,13 @@ const buttonVariants: Record<
       backgroundActive: 'card',
       boxShadow: 'borderStandardInvertedLarge',
     },
+    brandAccent: {
+      textTone: 'brandAccent',
+      background: undefined,
+      backgroundHover: 'brandAccentHover',
+      backgroundActive: 'brandAccentActive',
+      boxShadow: 'borderBrandAccentLarge',
+    },
     critical: {
       textTone: 'critical',
       background: undefined,
@@ -126,20 +133,20 @@ const buttonVariants: Record<
       backgroundActive: 'positiveActive',
       boxShadow: 'borderPositiveLarge',
     },
+  },
+  weak: {
+    default: {
+      textTone: 'formAccent',
+      background: undefined,
+      backgroundHover: 'formAccentHover',
+      backgroundActive: 'formAccentActive',
+      boxShadow: undefined,
+    },
     brandAccent: {
       textTone: 'brandAccent',
       background: undefined,
       backgroundHover: 'brandAccentHover',
       backgroundActive: 'brandAccentActive',
-      boxShadow: 'borderBrandAccentLarge',
-    },
-  },
-  weak: {
-    default: {
-      textTone: undefined,
-      background: undefined,
-      backgroundHover: 'neutral',
-      backgroundActive: 'neutral',
       boxShadow: undefined,
     },
     critical: {
@@ -154,13 +161,6 @@ const buttonVariants: Record<
       background: undefined,
       backgroundHover: 'positiveHover',
       backgroundActive: 'positiveActive',
-      boxShadow: undefined,
-    },
-    brandAccent: {
-      textTone: 'brandAccent',
-      background: undefined,
-      backgroundHover: 'brandAccentHover',
-      backgroundActive: 'brandAccentActive',
       boxShadow: undefined,
     },
   },
@@ -172,6 +172,13 @@ const buttonVariants: Record<
       backgroundActive: 'card',
       boxShadow: undefined,
     },
+    brandAccent: {
+      textTone: 'brandAccent',
+      background: undefined,
+      backgroundHover: 'brandAccentHover',
+      backgroundActive: 'brandAccentActive',
+      boxShadow: undefined,
+    },
     critical: {
       textTone: 'critical',
       background: undefined,
@@ -186,22 +193,10 @@ const buttonVariants: Record<
       backgroundActive: 'positiveActive',
       boxShadow: undefined,
     },
-    brandAccent: {
-      textTone: 'brandAccent',
-      background: undefined,
-      backgroundHover: 'brandAccentHover',
-      backgroundActive: 'brandAccentActive',
-      boxShadow: undefined,
-    },
   },
 };
 
 const useButtonVariant = (weight: ButtonWeight, tone?: ButtonTone) => {
-  // const variantName =
-  //   useBackgroundLightness() === 'dark' && weight === 'regular'
-  //     ? 'regularInverted'
-  //     : weight;
-
   let variantName: ButtonVariant = weight;
 
   if (useBackgroundLightness() === 'dark') {
@@ -327,6 +322,7 @@ export const PrivateButtonRenderer = ({
   const { background, boxShadow } = useButtonVariant(weight, tone);
   const virtualTouchableStyles = useVirtualTouchable({ xAxis: false });
   const isDarkBg = useBackgroundLightness() === 'dark';
+  const isNotStrong = weight !== 'strong';
 
   const buttonStyles = useBoxStyles({
     component: 'button',
@@ -342,10 +338,7 @@ export const PrivateButtonRenderer = ({
     outline: 'none',
     className: [
       styles.root,
-      weight === 'regular' ? styles.transparentBg : null,
-      typeof tone !== 'undefined' || weight === 'weak' || weight === 'regular'
-        ? styles.lightHover
-        : null,
+      isNotStrong ? styles.lightHover : null,
       isDarkBg ? styles.inverted : null,
       size === 'small' ? virtualTouchableStyles : null,
     ],

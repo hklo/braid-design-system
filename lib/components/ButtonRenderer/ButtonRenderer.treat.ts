@@ -4,10 +4,6 @@ export const root = style({
   textDecoration: 'none',
 });
 
-export const transparentBg = style({
-  backgroundColor: 'transparent',
-});
-
 export const inverted = style({});
 export const lightHover = style({});
 
