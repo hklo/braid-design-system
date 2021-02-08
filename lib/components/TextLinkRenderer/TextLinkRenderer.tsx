@@ -6,19 +6,11 @@ import TextLinkRendererContext from './TextLinkRendererContext';
 import TextContext from '../Text/TextContext';
 import HeadingContext from '../Heading/HeadingContext';
 import ActionsContext from '../Actions/ActionsContext';
-import { FieldOverlay } from '../private/FieldOverlay/FieldOverlay';
 import { useBoxStyles } from '../Box/useBoxStyles';
-import { Box } from '../Box/Box';
-import {
-  useTextTone,
-  useWeight,
-  useTouchableSpace,
-  useText,
-} from '../../hooks/typography';
+import { useTextTone, useWeight } from '../../hooks/typography';
 import * as styleRefs from './TextLinkRenderer.treat';
 import { useBackground } from '../Box/BackgroundContext';
 import { useVirtualTouchable } from '../private/touchable/useVirtualTouchable';
-import { PrivateButtonRendererProps } from '../ButtonRenderer/ButtonRenderer';
 
 interface StyleProps {
   style: CSSProperties;
@@ -32,35 +24,6 @@ export interface PrivateTextLinkRendererProps {
   hitArea?: 'standard' | 'large';
   children: (styleProps: StyleProps) => ReactElement;
 }
-
-export const PrivateTextLinkRenderer = (
-  props: PrivateTextLinkRendererProps,
-) => {
-  const actionsContext = useContext(ActionsContext);
-
-  assert(
-    (() => {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const inText = useContext(TextContext);
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const inHeading = useContext(HeadingContext);
-
-      const inActions = actionsContext !== null;
-
-      return inText || inHeading || inActions;
-    })(),
-    'TextLink components must be rendered within a Text or Heading component.',
-  );
-
-  if (actionsContext !== null) {
-    return <ButtonLink size={actionsContext.size} {...props} />;
-  }
-
-  return <InlineLink {...props} />;
-};
-
-/** @deprecated `TextLinkRenderer` has been deprecated. Use [TextLink](https://seek-oss.github.io/braid-design-system/components/TextLink) or [TextLinkButton](https://seek-oss.github.io/braid-design-system/components/TextLinkButton) instead.  If your usage of `TextLinkRenderer` is not covered by either of these, please let us know. */
-export const TextLinkRenderer = PrivateTextLinkRenderer;
 
 function useDefaultLinkWeight() {
   const backgroundContext = useBackground();
@@ -96,7 +59,7 @@ function useLinkStyles(weight: TextLinkWeight, showVisited: boolean) {
   ];
 }
 
-function InlineLink({
+export function PrivateTextLinkRenderer({
   weight: weightProp,
   showVisited = false,
   hitArea = 'standard',
@@ -105,6 +68,24 @@ function InlineLink({
   const virtualTouchableStyle = useVirtualTouchable();
   const defaultWeight = useDefaultLinkWeight();
   const weight = weightProp ?? defaultWeight;
+  const actionsContext = useContext(ActionsContext);
+
+  assert(
+    actionsContext === null,
+    'TextLink should no longer be used inside Actions. Please use a Button with a weight of `xweak`. See https://seek-oss.github.io/braid-design-system/components/Button',
+  );
+
+  assert(
+    (() => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const inText = useContext(TextContext);
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const inHeading = useContext(HeadingContext);
+
+      return inText || inHeading;
+    })(),
+    'TextLink components must be rendered within a Text or Heading component.',
+  );
 
   return (
     <TextLinkRendererContext.Provider value={weight}>
@@ -123,61 +104,5 @@ function InlineLink({
   );
 }
 
-interface ButtonLinkProps extends PrivateTextLinkRendererProps {
-  size?: PrivateButtonRendererProps['size'];
-}
-function ButtonLink({
-  size = 'standard',
-  weight,
-  showVisited = false,
-  hitArea,
-  children,
-}: ButtonLinkProps) {
-  const styles = useStyles(styleRefs);
-  const textLinkWeight = useDefaultLinkWeight();
-  const tone = textLinkWeight === 'weak' ? 'neutral' : 'link';
-  const standardTouchableSpaceStyles = useTouchableSpace('standard');
-  const buttonLinkTextProps = {
-    size,
-    tone,
-    baseline: false,
-  } as const;
-
-  assert(!weight, 'TextLink components should not set "weight" within Actions');
-
-  assert(
-    !hitArea,
-    'TextLink components should not set "hitArea" within Actions',
-  );
-
-  return (
-    <Box position="relative">
-      <TextLinkRendererContext.Provider value={textLinkWeight}>
-        <TextContext.Provider value={buttonLinkTextProps}>
-          {children({
-            style: {},
-            className: classnames(
-              styles.button,
-              useLinkStyles(textLinkWeight, showVisited),
-              useText(buttonLinkTextProps),
-              size === 'standard' ? standardTouchableSpaceStyles : null,
-              useBoxStyles({
-                component: 'a',
-                cursor: 'pointer',
-                outline: 'none',
-                display: 'block',
-                width: 'full',
-                paddingX: size === 'small' ? 'xsmall' : 'small',
-                paddingY: size === 'small' ? 'xsmall' : undefined,
-                borderRadius: 'standard',
-                textAlign: 'center',
-                userSelect: 'none',
-              }),
-            ),
-          })}
-        </TextContext.Provider>
-      </TextLinkRendererContext.Provider>
-      <FieldOverlay variant="focus" className={styles.focusOverlay} />
-    </Box>
-  );
-}
+/** @deprecated `TextLinkRenderer` has been deprecated. Use [TextLink](https://seek-oss.github.io/braid-design-system/components/TextLink) or [TextLinkButton](https://seek-oss.github.io/braid-design-system/components/TextLinkButton) instead.  If your usage of `TextLinkRenderer` is not covered by either of these, please let us know. */
+export const TextLinkRenderer = PrivateTextLinkRenderer;

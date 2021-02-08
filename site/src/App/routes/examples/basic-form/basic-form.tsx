@@ -70,7 +70,7 @@ const page: Page = {
                 description="Summarise your responsibilities, skills and achievements."
               />
               <Actions>
-                <Button>Save</Button>
+                <Button weight="strong">Save</Button>
               </Actions>
             </Stack>
           </Stack>
@@ -299,7 +299,7 @@ const page: Page = {
                 secondaryLabel="recommended"
                 description="Summarise your responsibilities, skills and achievements."
               />
-              <Button>Save</Button>
+              <Button weight="strong">Save</Button>
             </Stack>
           </Card>
         </Step>
@@ -340,7 +340,7 @@ const page: Page = {
                 description="Summarise your responsibilities, skills and achievements."
               />
               <Actions>
-                <Button>Save</Button>
+                <Button weight="strong">Save</Button>
               </Actions>
             </Stack>
           </Card>
@@ -386,7 +386,7 @@ const page: Page = {
                 />
               </Stack>
               <Actions>
-                <Button>Save</Button>
+                <Button weight="strong">Save</Button>
               </Actions>
             </Stack>
           </Card>

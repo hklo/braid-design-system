@@ -15,20 +15,28 @@ const docs: ComponentDocs = {
             <ButtonLink href="#" weight="strong">
               Strong
             </ButtonLink>
-            <ButtonLink href="#">Regular</ButtonLink>
+            <ButtonLink href="#" weight="regular">
+              Regular
+            </ButtonLink>
             <ButtonLink href="#" weight="weak">
               Weak
+            </ButtonLink>
+            <ButtonLink href="#" weight="xweak">
+              Xweak
             </ButtonLink>
           </Inline>
           <Inline space="small" collapseBelow="desktop">
             <ButtonLink href="#" weight="strong" size="small">
               Strong
             </ButtonLink>
-            <ButtonLink href="#" size="small">
+            <ButtonLink href="#" weight="regular" size="small">
               Regular
             </ButtonLink>
             <ButtonLink href="#" weight="weak" size="small">
               Weak
+            </ButtonLink>
+            <ButtonLink href="#" weight="xweak" size="small">
+              Xweak
             </ButtonLink>
           </Inline>
         </Stack>

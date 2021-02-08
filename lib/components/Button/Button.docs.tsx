@@ -20,21 +20,99 @@ const docs: ComponentDocs = {
   Example: () =>
     source(
       <Card>
-        <Stack space="medium">
-          <Inline space="small" collapseBelow="desktop">
-            <Button weight="strong">Strong</Button>
-            <Button>Regular</Button>
-            <Button weight="weak">Weak</Button>
-          </Inline>
-          <Inline space="small" collapseBelow="desktop">
-            <Button weight="strong" size="small">
-              Strong
-            </Button>
-            <Button size="small">Regular</Button>
-            <Button weight="weak" size="small">
-              Weak
-            </Button>
-          </Inline>
+        <Stack space="xlarge">
+          <Stack space="medium">
+            <Text tone="secondary" size="xsmall">
+              DEFAULT
+            </Text>
+            <Inline space="small" collapseBelow="desktop">
+              <Button weight="strong">Strong</Button>
+              <Button weight="regular">Regular</Button>
+              <Button weight="weak">Weak</Button>
+              <Button weight="xweak">Xweak</Button>
+            </Inline>
+            <Inline space="small" collapseBelow="desktop">
+              <Button weight="strong" size="small">
+                Strong
+              </Button>
+              <Button weight="regular" size="small">
+                Regular
+              </Button>
+              <Button weight="weak" size="small">
+                Weak
+              </Button>
+              <Button weight="xweak" size="small">
+                Xweak
+              </Button>
+            </Inline>
+          </Stack>
+          <Stack space="medium">
+            <Text tone="secondary" size="xsmall">
+              BRANDACCENT
+            </Text>
+            <Inline space="small" collapseBelow="desktop">
+              <Button tone="brandAccent" weight="strong">
+                Strong
+              </Button>
+              <Button tone="brandAccent" weight="regular">
+                Regular
+              </Button>
+              <Button tone="brandAccent" weight="weak">
+                Weak
+              </Button>
+              <Button tone="brandAccent" weight="xweak">
+                Xweak
+              </Button>
+            </Inline>
+            <Inline space="small" collapseBelow="desktop">
+              <Button tone="brandAccent" weight="strong" size="small">
+                Strong
+              </Button>
+              <Button tone="brandAccent" weight="regular" size="small">
+                Regular
+              </Button>
+              <Button tone="brandAccent" weight="weak" size="small">
+                Weak
+              </Button>
+              <Button tone="brandAccent" weight="xweak" size="small">
+                Xweak
+              </Button>
+            </Inline>
+          </Stack>
+          <Stack space="medium">
+            <Text tone="secondary" size="xsmall">
+              CRITICAL
+            </Text>
+            <Inline space="small" collapseBelow="desktop">
+              <Button tone="critical" weight="strong">
+                Strong
+              </Button>
+              <Button tone="critical" weight="regular">
+                Regular
+              </Button>
+              <Button tone="critical" weight="weak">
+                Weak
+              </Button>
+              <Button tone="critical" weight="xweak">
+                Xweak
+              </Button>
+            </Inline>
+
+            <Inline space="small" collapseBelow="desktop">
+              <Button tone="critical" weight="strong" size="small">
+                Strong
+              </Button>
+              <Button tone="critical" weight="regular" size="small">
+                Regular
+              </Button>
+              <Button tone="critical" weight="weak" size="small">
+                Weak
+              </Button>
+              <Button tone="critical" weight="xweak" size="small">
+                Xweak
+              </Button>
+            </Inline>
+          </Stack>
         </Stack>
       </Card>,
     ),
@@ -68,8 +146,9 @@ const docs: ComponentDocs = {
               </Text>
               <Inline space="small" collapseBelow="desktop">
                 <Button weight="strong">Strong</Button>
-                <Button>Regular</Button>
+                <Button weight="regular">Regular</Button>
                 <Button weight="weak">Weak</Button>
+                <Button weight="xweak">Xweak</Button>
               </Inline>
             </Stack>
             <Stack space="small">
@@ -80,9 +159,14 @@ const docs: ComponentDocs = {
                 <Button weight="strong" size="small">
                   Strong
                 </Button>
-                <Button size="small">Regular</Button>
+                <Button weight="regular" size="small">
+                  Regular
+                </Button>
                 <Button weight="weak" size="small">
                   Weak
+                </Button>
+                <Button weight="xweak" size="small">
+                  Xweak
                 </Button>
               </Inline>
             </Stack>
@@ -155,7 +239,15 @@ const docs: ComponentDocs = {
             <Button tone="brandAccent" weight="strong">
               Search
             </Button>
-            <Button tone="brandAccent">Search</Button>
+            <Button tone="brandAccent" weight="regular">
+              Search
+            </Button>
+            <Button tone="brandAccent" weight="weak">
+              Search
+            </Button>
+            <Button tone="brandAccent" weight="xweak">
+              Search
+            </Button>
           </Inline>,
         ),
     },
@@ -174,7 +266,13 @@ const docs: ComponentDocs = {
             <Button tone="critical" weight="strong">
               <IconDelete /> Delete
             </Button>
-            <Button tone="critical">
+            <Button tone="critical" weight="regular">
+              <IconDelete /> Delete
+            </Button>
+            <Button tone="critical" weight="weak">
+              <IconDelete /> Delete
+            </Button>
+            <Button tone="critical" weight="xweak">
               <IconDelete /> Delete
             </Button>
           </Inline>,
@@ -185,8 +283,8 @@ const docs: ComponentDocs = {
       description: (
         <>
           <Text>
-            Weak Button elements are inverted when rendered on a dark
-            background.
+            Regular, Weak, and Xweak Button elements are inverted when rendered
+            on a dark background.
           </Text>
           <Text>
             When using custom backgrounds or images, this behaviour can be
@@ -203,7 +301,9 @@ const docs: ComponentDocs = {
         source(
           <Box background="brand">
             <Inline space="small">
-              <Button weight="weak">Weak Button</Button>
+              <Button weight="regular">Regular</Button>
+              <Button weight="weak">Weak</Button>
+              <Button weight="xweak">Xweak</Button>
             </Inline>
           </Box>,
         ),

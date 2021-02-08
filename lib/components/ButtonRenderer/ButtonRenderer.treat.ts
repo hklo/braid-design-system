@@ -6,6 +6,15 @@ export const root = style({
 
 export const inverted = style({});
 export const lightHover = style({});
+export const light = style({});
+
+export const backgroundOverlay = style({
+  selectors: {
+    [`${light} &`]: {
+      opacity: 0.075,
+    },
+  },
+});
 
 export const activeOverlay = style({
   selectors: {

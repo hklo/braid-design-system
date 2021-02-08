@@ -1,27 +1,29 @@
 import React from 'react';
 import source from '../../utils/source.macro';
 import { ComponentExample } from '../../../site/src/types';
-import { Actions, Button, TextLink, IconDelete } from '../';
+import { Actions, Button, IconDelete } from '../';
 
 export const galleryItems: ComponentExample[] = [
   {
-    label: 'With strong Button and TextLink',
+    label: 'With a strong brandAccent and a xweak Button',
     Example: () =>
       source(
         <Actions>
-          <Button weight="strong">Strong Button</Button>
-          <TextLink href="#">TextLink</TextLink>
+          <Button weight="strong" tone="brandAccent">
+            Strong Branded Button
+          </Button>
+          <Button weight="xweak">Xweak Button</Button>
         </Actions>,
       ),
   },
   {
-    label: 'With multiple buttons and a TextLink',
+    label: 'With multiple buttons',
     Example: () =>
       source(
         <Actions>
-          <Button>Regular Button</Button>
-          <Button weight="weak">Weak Button</Button>
-          <TextLink href="#">TextLink</TextLink>
+          <Button weight="strong">Strong Button</Button>
+          <Button weight="regular">Regular Button</Button>
+          <Button weight="xweak">Xweak Button</Button>
         </Actions>,
       ),
   },
@@ -30,10 +32,10 @@ export const galleryItems: ComponentExample[] = [
     Example: () =>
       source(
         <Actions>
-          <Button tone="critical">
+          <Button weight="strong" tone="critical">
             <IconDelete /> Delete
           </Button>
-          <TextLink href="#">Cancel</TextLink>
+          <Button weight="xweak">Cancel</Button>
         </Actions>,
       ),
   },
@@ -42,9 +44,9 @@ export const galleryItems: ComponentExample[] = [
     Example: () =>
       source(
         <Actions size="small">
-          <Button>Regular Button</Button>
-          <Button weight="weak">Weak Button</Button>
-          <TextLink href="#">TextLink</TextLink>
+          <Button weight="strong">Strong Button</Button>
+          <Button weight="regular">Regular Button</Button>
+          <Button weight="xweak">Xweak Button</Button>
         </Actions>,
       ),
   },

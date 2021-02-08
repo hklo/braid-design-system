@@ -1726,6 +1726,7 @@ Object {
         | "regular"
         | "strong"
         | "weak"
+        | "xweak"
 },
 }
 `;
@@ -2154,6 +2155,7 @@ Object {
         | "regular"
         | "strong"
         | "weak"
+        | "xweak"
 },
 }
 `;
@@ -2174,6 +2176,7 @@ Object {
         | "regular"
         | "strong"
         | "weak"
+        | "xweak"
 },
 }
 `;

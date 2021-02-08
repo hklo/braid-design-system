@@ -20,9 +20,9 @@ const docs: ComponentDocs = {
     source(
       <Card>
         <Actions>
-          <Button>Regular Button</Button>
-          <Button weight="weak">Weak Button</Button>
-          <TextLink href="#">TextLink</TextLink>
+          <Button weight="strong">Strong Button</Button>
+          <Button weight="regular">Regular Button</Button>
+          <Button weight="xweak">Xweak Button</Button>
         </Actions>
       </Card>,
     ),
@@ -54,9 +54,9 @@ const docs: ComponentDocs = {
                 Standard size
               </Text>
               <Actions>
-                <Button>Regular Button</Button>
-                <Button weight="weak">Weak Button</Button>
-                <TextLink href="#">TextLink</TextLink>
+                <Button weight="strong">Strong Button</Button>
+                <Button weight="regular">Regular Button</Button>
+                <Button weight="xweak">Xweak Button</Button>
               </Actions>
             </Stack>
             <Stack space="small">
@@ -64,9 +64,9 @@ const docs: ComponentDocs = {
                 Small size
               </Text>
               <Actions size="small">
-                <Button>Regular Button</Button>
-                <Button weight="weak">Weak Button</Button>
-                <TextLink href="#">TextLink</TextLink>
+                <Button weight="strong">Strong Button</Button>
+                <Button weight="regular">Regular Button</Button>
+                <Button weight="xweak">Xweak Button</Button>
               </Actions>
             </Stack>
           </Stack>,
@@ -77,10 +77,9 @@ const docs: ComponentDocs = {
       description: (
         <Text>
           You can add icons to{' '}
-          <TextLink href="/components/Button">Button</TextLink> and{' '}
-          <TextLink href="/components/TextLink">TextLink</TextLink> elements by
-          nesting icon elements inside. The size of the icon will adjust
-          automatically based on its surrounding context.
+          <TextLink href="/components/Button">Button</TextLink> elements by
+          nesting icons inside. The size of the icon will adjust automatically
+          based on its surrounding context.
         </Text>
       ),
       Example: () =>
@@ -91,10 +90,10 @@ const docs: ComponentDocs = {
                 Standard size
               </Text>
               <Actions>
-                <Button>
+                <Button weight="strong">
                   <IconSend /> Send
                 </Button>
-                <TextLink href="#">Cancel</TextLink>
+                <Button weight="xweak">Cancel</Button>
               </Actions>
             </Stack>
             <Stack space="small">
@@ -102,10 +101,10 @@ const docs: ComponentDocs = {
                 Small size
               </Text>
               <Actions size="small">
-                <Button>
+                <Button weight="strong">
                   <IconSend /> Send
                 </Button>
-                <TextLink href="#">Cancel</TextLink>
+                <Button weight="xweak">Cancel</Button>
               </Actions>
             </Stack>
           </Stack>,
@@ -123,23 +122,12 @@ const docs: ComponentDocs = {
       Example: () =>
         source(
           <Actions>
-            <Button tone="critical">
+            <Button weight="strong" tone="critical">
               <IconDelete /> Delete
             </Button>
-            <TextLink href="#">Cancel</TextLink>
+            <Button weight="xweak">Cancel</Button>
           </Actions>,
         ),
-    },
-    {
-      label: 'Contextual design',
-      description: (
-        <Text>
-          When nested inside Actions,{' '}
-          <TextLink href="/components/TextLink">TextLink</TextLink> is given a
-          more prominent treatment to visually align with{' '}
-          <TextLink href="/components/Button">Button</TextLink>.
-        </Text>
-      ),
     },
   ],
 };

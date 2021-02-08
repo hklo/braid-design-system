@@ -24,25 +24,19 @@ import * as styleRefs from './ButtonRenderer.treat';
 
 type ButtonSize = 'standard' | 'small';
 type ButtonTone = 'brandAccent' | 'critical';
-type ButtonWeight = 'weak' | 'regular' | 'strong';
-type ButtonVariant =
-  | 'strong'
-  | 'regular'
-  | 'regularInverted'
-  | 'weak'
-  | 'weakInverted';
+type ButtonWeight = 'xweak' | 'weak' | 'regular' | 'strong';
+type ButtonVariant = 'strong' | 'regular' | 'weak' | 'xweak';
+type ButtonStyles = {
+  textTone: TextProps['tone'];
+  background: UseBoxStylesProps['background'];
+  backgroundHover: UseBoxStylesProps['background'];
+  backgroundActive: UseBoxStylesProps['background'];
+  boxShadow: UseBoxStylesProps['boxShadow'];
+};
+
 const buttonVariants: Record<
   ButtonVariant,
-  Record<
-    'default' | ButtonTone,
-    {
-      textTone: TextProps['tone'];
-      background: UseBoxStylesProps['background'];
-      backgroundHover: UseBoxStylesProps['background'];
-      backgroundActive: UseBoxStylesProps['background'];
-      boxShadow: UseBoxStylesProps['boxShadow'];
-    }
-  >
+  Record<'default' | ButtonTone, ButtonStyles>
 > = {
   strong: {
     default: {
@@ -90,30 +84,30 @@ const buttonVariants: Record<
       boxShadow: 'borderCriticalLarge',
     },
   },
-  regularInverted: {
+  weak: {
     default: {
-      textTone: undefined,
-      background: undefined,
-      backgroundHover: 'card',
-      backgroundActive: 'card',
-      boxShadow: 'borderStandardInvertedLarge',
+      textTone: 'formAccent',
+      background: 'formAccent',
+      backgroundHover: 'formAccentHover',
+      backgroundActive: 'formAccentActive',
+      boxShadow: undefined,
     },
     brandAccent: {
       textTone: 'brandAccent',
-      background: undefined,
+      background: 'brandAccent',
       backgroundHover: 'brandAccentHover',
       backgroundActive: 'brandAccentActive',
-      boxShadow: 'borderBrandAccentLarge',
+      boxShadow: undefined,
     },
     critical: {
       textTone: 'critical',
-      background: undefined,
+      background: 'critical',
       backgroundHover: 'criticalHover',
       backgroundActive: 'criticalActive',
-      boxShadow: 'borderCriticalLarge',
+      boxShadow: undefined,
     },
   },
-  weak: {
+  xweak: {
     default: {
       textTone: 'formAccent',
       background: undefined,
@@ -136,46 +130,22 @@ const buttonVariants: Record<
       boxShadow: undefined,
     },
   },
-  weakInverted: {
-    default: {
-      textTone: undefined,
-      background: undefined,
-      backgroundHover: 'card',
-      backgroundActive: 'card',
-      boxShadow: undefined,
-    },
-    brandAccent: {
-      textTone: 'brandAccent',
-      background: undefined,
-      backgroundHover: 'brandAccentHover',
-      backgroundActive: 'brandAccentActive',
-      boxShadow: undefined,
-    },
-    critical: {
-      textTone: 'critical',
-      background: undefined,
-      backgroundHover: 'criticalHover',
-      backgroundActive: 'criticalActive',
-      boxShadow: undefined,
-    },
-  },
 };
 
 const useButtonVariant = (weight: ButtonWeight, tone?: ButtonTone) => {
-  let variantName: ButtonVariant = weight;
-
-  if (useBackgroundLightness() === 'dark') {
-    if (weight === 'regular') {
-      variantName = 'regularInverted';
-    }
-    if (weight === 'weak') {
-      variantName = 'weakInverted';
-    }
+  if (useBackgroundLightness() === 'dark' && !tone && weight !== 'strong') {
+    return {
+      textTone: undefined,
+      background: weight === 'weak' ? 'card' : undefined,
+      backgroundHover: 'card',
+      backgroundActive: 'card',
+      boxShadow:
+        weight === 'regular' ? 'borderStandardInvertedLarge' : undefined,
+    } as ButtonStyles;
   }
 
   return (
-    buttonVariants[variantName][tone ?? 'default'] ??
-    buttonVariants[variantName].default
+    buttonVariants[weight][tone ?? 'default'] ?? buttonVariants[weight].default
   );
 };
 
@@ -204,6 +174,11 @@ const ButtonChildren = ({ children }: ButtonChildrenProps) => {
   return (
     <Fragment>
       <FieldOverlay
+        background={buttonVariant.background}
+        className={styles.backgroundOverlay}
+        visible={Boolean(buttonVariant.background)}
+      />
+      <FieldOverlay
         variant="focus"
         onlyVisibleForKeyboardNavigation
         className={styles.focusOverlay}
@@ -218,7 +193,7 @@ const ButtonChildren = ({ children }: ButtonChildrenProps) => {
       />
       <Box
         position="relative"
-        paddingX={size === 'small' || weight === 'weak' ? 'small' : 'medium'}
+        paddingX={size === 'small' || weight === 'xweak' ? 'small' : 'medium'}
         paddingY={size === 'small' ? 'xsmall' : undefined}
         pointerEvents="none"
         textAlign="center"
@@ -271,7 +246,7 @@ export interface PrivateButtonRendererProps {
 export const PrivateButtonRenderer = ({
   size: sizeProp,
   tone,
-  weight = 'regular',
+  weight = 'strong',
   loading = false,
   children,
 }: PrivateButtonRendererProps) => {
@@ -297,12 +272,12 @@ export const PrivateButtonRenderer = ({
     display: 'block',
     borderRadius: 'standard',
     boxShadow,
-    background,
     transform: 'touchable',
     transition: 'touchable',
     outline: 'none',
     className: [
       styles.root,
+      weight === 'weak' ? styles.light : null,
       isNotStrong ? styles.lightHover : null,
       isDarkBg ? styles.inverted : null,
       size === 'small' ? virtualTouchableStyles : null,
@@ -325,7 +300,7 @@ export const PrivateButtonRenderer = ({
     </ButtonChildrenContext.Provider>
   );
 
-  return background ? (
+  return background && weight !== 'weak' ? (
     <BackgroundProvider value={background}>{button}</BackgroundProvider>
   ) : (
     button

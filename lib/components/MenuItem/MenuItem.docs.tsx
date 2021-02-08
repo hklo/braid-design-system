@@ -7,7 +7,6 @@ import {
   MenuItemLink,
   Text,
   TextLink,
-  TextLinkButton,
   Strong,
   List,
   Box,
@@ -114,6 +113,7 @@ const docs: ComponentDocs = {
                 <Actions>
                   <Button
                     tone="critical"
+                    weight="strong"
                     onClick={() => {
                       toggleState('confirm');
                       showToast({
@@ -125,9 +125,9 @@ const docs: ComponentDocs = {
                   >
                     <IconDelete /> Delete
                   </Button>
-                  <TextLinkButton onClick={() => toggleState('confirm')}>
+                  <Button weight="xweak" onClick={() => toggleState('confirm')}>
                     Cancel
-                  </TextLinkButton>
+                  </Button>
                 </Actions>
               </Stack>
             </Dialog>

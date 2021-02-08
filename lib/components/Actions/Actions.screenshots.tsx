@@ -1,13 +1,6 @@
 import React, { Fragment } from 'react';
 import { ComponentScreenshot } from '../../../site/src/types';
-import {
-  Box,
-  Button,
-  IconNewWindow,
-  Stack,
-  TextLink,
-  Text,
-} from '../../components';
+import { Box, Button, IconNewWindow, Stack, Text } from '../../components';
 import { Actions } from './Actions';
 import { background as boxBackgrounds } from '../Box/useBoxStyles.treat';
 
@@ -18,9 +11,10 @@ export const screenshots: ComponentScreenshot = {
       label: 'Standard Actions',
       Example: () => (
         <Actions>
+          <Button weight="strong">Strong</Button>
           <Button weight="regular">Regular</Button>
           <Button weight="weak">Weak</Button>
-          <TextLink href="#">TextLink</TextLink>
+          <Button weight="xweak">Xweak</Button>
         </Actions>
       ),
     },
@@ -28,9 +22,10 @@ export const screenshots: ComponentScreenshot = {
       label: 'Small Actions',
       Example: () => (
         <Actions size="small">
+          <Button weight="strong">Strong</Button>
           <Button weight="regular">Regular</Button>
           <Button weight="weak">Weak</Button>
-          <TextLink href="#">TextLink</TextLink>
+          <Button weight="xweak">Xweak</Button>
         </Actions>
       ),
     },
@@ -48,10 +43,12 @@ export const screenshots: ComponentScreenshot = {
                 <Stack space="xsmall">
                   <Text size="small">{background}</Text>
                   <Actions>
-                    <Button weight="strong">Strong</Button>
-                    <TextLink href="#">
-                      TextLink <IconNewWindow />
-                    </TextLink>
+                    <Button weight="strong" tone="brandAccent">
+                      Strong
+                    </Button>
+                    <Button weight="xweak">
+                      Xweak <IconNewWindow />
+                    </Button>
                   </Actions>
                 </Stack>
               </Box>
